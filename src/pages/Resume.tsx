@@ -14,7 +14,8 @@ interface IProfile {
 interface IRepositorie {
     html_url: string,
     full_name: string,
-    updated_at: Date
+    updated_at: Date,
+    id: number
 }
 
 export default function Resume (props: IResumeProps) {
@@ -54,7 +55,7 @@ export default function Resume (props: IResumeProps) {
                 <h2>{`Account exists: ${new Date().getFullYear() - accountExists.getFullYear()} years, ${accountExists.getMonth()} months, ${accountExists.getDay()} days, ${accountExists.getHours()} hours.`}</h2>
                 <h2>{`${profile?.login as string} have ${profile?.public_repos as number} public repositories`}</h2>
                 <h1>Public repositories</h1>
-                {repositories?.map( rep => (<a href={rep.html_url as string}>{getSecondPart(rep.full_name) as string}</a>))}
+                {repositories?.map( rep => (<a key={rep.id} href={rep.html_url as string}>{getSecondPart(rep.full_name) as string}</a>))}
             </div>
         </div>
     </div>
